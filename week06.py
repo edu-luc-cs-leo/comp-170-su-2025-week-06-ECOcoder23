@@ -40,17 +40,18 @@ def apply_markup(filepath: str) -> None:
     with open(path_to_file+file_name_2, "r") as markup_file:
         for line in markup_file: 
             if line: 
-                mark_up_txt += line 
-            words = line.split()
-            for words in line: 
-                if words.startwith(".") == True:
-                    words.strip('.')
-                    words = words.upper()
-                else: 
-                    if words.startwtih("_") == True:
-                        words.strip('_')
-                        letters = list(words)
-                        words = " ".join(letters)  
+                for words in line:
+                    if words.startswith('.'):
+                        words = words.strip('.')
+                        words = words.upper()
+                    elif words.startswith('_'):
+                        words = words.strip('_')
+                        words = list(words)
+                        words = " ".join(words)
+                    else: 
+                        if words.startswith(' '):
+                            words = words
+                    mark_up_txt += words           
         print(mark_up_txt) 
 
 apply_markup(file_name_2)
